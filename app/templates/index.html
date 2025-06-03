@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retail Price Optimization</title>
+</head>
+<body>
+    <h1>Welcome to Retail Price Optimization!</h1>
+    <p>This is your app homepage.</p>
+
+    <h2>Predict Total Price</h2>
+    <form id="predict-form">
+        <label for="unit_price">Unit Price:</label>
+        <input type="number" id="unit_price" name="unit_price" step="any" required><br><br>
+
+        <label for="freight_price">Freight Price:</label>
+        <input type="number" id="freight_price" name="freight_price" step="any" required><br><br>
+
+        <label for="lag_price">Lag Price:</label>
+        <input type="number" id="lag_price" name="lag_price" step="any" required><br><br>
+
+        <label for="comp_1">Comp 1:</label>
+        <input type="number" id="comp_1" name="comp_1" step="any" required><br><br>
+
+        <label for="ps1">PS1:</label>
+        <input type="number" id="ps1" name="ps1" step="any" required><br><br>
+
+        <label for="fp1">FP1:</label>
+        <input type="number" id="fp1" name="fp1" step="any" required><br><br>
+
+        <label for="comp_2">Comp 2:</label>
+        <input type="number" id="comp_2" name="comp_2" step="any" required><br><br>
+
+        <label for="ps2">PS2:</label>
+        <input type="number" id="ps2" name="ps2" step="any" required><br><br>
+
+        <label for="fp2">FP2:</label>
+        <input type="number" id="fp2" name="fp2" step="any" required><br><br>
+
+        <label for="comp_3">Comp 3:</label>
+        <input type="number" id="comp_3" name="comp_3" step="any" required><br><br>
+
+        <label for="ps3">PS3:</label>
+        <input type="number" id="ps3" name="ps3" step="any" required><br><br>
+
+        <label for="fp3">FP3:</label>
+        <input type="number" id="fp3" name="fp3" step="any" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        const form = document.getElementById('predict-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const features = {
+                unit_price: parseFloat(document.getElementById('unit_price').value),
+                freight_price: parseFloat(document.getElementById('freight_price').value),
+                lag_price: parseFloat(document.getElementById('lag_price').value),
+                comp_1: parseFloat(document.getElementById('comp_1').value),
+                ps1: parseFloat(document.getElementById('ps1').value),
+                fp1: parseFloat(document.getElementById('fp1').value),
+                comp_2: parseFloat(document.getElementById('comp_2').value),
+                ps2: parseFloat(document.getElementById('ps2').value),
+                fp2: parseFloat(document.getElementById('fp2').value),
+                comp_3: parseFloat(document.getElementById('comp_3').value),
+                ps3: parseFloat(document.getElementById('ps3').value),
+                fp3: parseFloat(document.getElementById('fp3').value),
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(features)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                document.getElementById('result').innerText = `Predicted Total Price: ${data.predicted_total_price}`;
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

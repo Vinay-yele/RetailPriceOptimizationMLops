@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/lavya/Downloads/retail-price-optimization/mlruns/0/09d610e95dfe45afaf06f09b3f239c1e/artifacts
+end_time: 1748926309072
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 09d610e95dfe45afaf06f09b3f239c1e
+run_name: crawling-skunk-950
+run_uuid: 09d610e95dfe45afaf06f09b3f239c1e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748926302872
+status: 3
+tags: []
+user_id: lavya
