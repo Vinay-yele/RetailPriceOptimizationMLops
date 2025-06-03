@@ -1,9 +1,8 @@
 #app.py
-
+# This is the main Flask application file that serves the web interface and handles predictions.
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from flask import Flask, request, jsonify, render_template
 from src.predict import predict_sales
 
