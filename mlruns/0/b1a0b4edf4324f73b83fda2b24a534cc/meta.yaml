@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/lavya/Downloads/retail-price-optimization/mlruns/0/b1a0b4edf4324f73b83fda2b24a534cc/artifacts
+end_time: 1750957656119
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b1a0b4edf4324f73b83fda2b24a534cc
+run_name: chill-mink-575
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750957654169
+status: 3
+tags: []
+user_id: vinayyele

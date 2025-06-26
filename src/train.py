@@ -13,8 +13,8 @@ features = [
     "unit_price", "freight_price", "lag_price", "comp_1", "ps1", "fp1",
     "comp_2", "ps2", "fp2", "comp_3", "ps3", "fp3"
 ]
-target = "total_price"
-
+# target = "total_price"
+target = "unit_price"
 X = df[features]
 y = df[target]
 
