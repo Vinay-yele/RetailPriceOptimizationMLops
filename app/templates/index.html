@@ -2,425 +2,230 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retail Price Optimization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #ede7f6, #f3e5f5);
+            margin: 0;
+            padding: 30px;
             color: #333;
-            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .info-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            background: #ffffffee;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(122, 0, 255, 0.2);
         }
 
-        .info-card h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 600;
+        h1, h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #6a1b9a;
         }
 
-        .info-card p {
-            color: #666;
-            margin-bottom: 1rem;
+        form .form-group {
+            margin-bottom: 15px;
         }
 
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #555;
-        }
-
-        .feature-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
+        label {
             font-weight: bold;
         }
 
-        .prediction-section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
-        .prediction-section h2 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .form-group input {
-            padding: 0.8rem;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+        button {
+            background-color: #7e57c2;
+            color: #fff;
+            padding: 12px 25px;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
-            min-width: 200px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .result {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2c3e50;
-            border: 2px solid #e1e8ed;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
 
-        .result.success {
-            background: rgba(76, 175, 80, 0.1);
-            border-color: #4caf50;
-            color: #2e7d32;
-        }
-
-        .result.error {
-            background: rgba(244, 67, 54, 0.1);
-            border-color: #f44336;
-            color: #c62828;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 1rem;
-            }
+        button:hover {
+            background-color: #6a1b9a;
         }
 
         .tooltip {
-            position: relative;
             display: inline-block;
+            cursor: help;
+            background: #eee;
+            border-radius: 50%;
+            padding: 2px 6px;
+            margin-left: 5px;
+            font-size: 12px;
+            color: #555;
+            border: 1px solid #aaa;
+            white-space: nowrap;
+            transition: background 0.2s ease;
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
+        .tooltip:hover {
+            background: #ddd;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .explanation {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-left: 5px solid #7e57c2;
+            border-radius: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .explanation h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #6a1b9a;
+        }
+
+        .competitor-heading {
+            margin-top: 25px;
+            color: #4a148c;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Retail Price Optimization</h1>
-            <p>Advanced machine learning-powered pricing strategy tool designed to optimize retail pricing decisions through comprehensive competitor analysis and market intelligence.</p>
+        <h1>Retail Price Optimization</h1>
+        <h2>Predict Total Price</h2>
+
+        <form id="predict-form">
+            <div class="form-group">
+                <label for="unit_price">
+                    Unit Price
+                    <span class="tooltip">🛈 Base selling price. Example: 120.5</span>
+                </label>
+                <input type="number" id="unit_price" name="unit_price" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="freight_price">
+                    Freight Price
+                    <span class="tooltip">🛈 Shipping cost. Example: 10.0</span>
+                </label>
+                <input type="number" id="freight_price" name="freight_price" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lag_price">
+                    Previous Price (Lag)
+                    <span class="tooltip">🛈 Last month’s price. Example: 125.0</span>
+                </label>
+                <input type="number" id="lag_price" name="lag_price" step="any" required>
+            </div>
+
+            <!-- Competitor 1 -->
+            <h3 class="competitor-heading">🏷️ Competitor 1</h3>
+            <div class="form-group">
+                <label for="comp_1">
+                    Price <span class="tooltip">🛈 Price. Example: 118.0</span>
+                </label>
+                <input type="number" id="comp_1" name="comp_1" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="ps1">
+                    Product Score <span class="tooltip">🛈 Rating (1–5). Example: 4.2</span>
+                </label>
+                <input type="number" id="ps1" name="ps1" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="fp1">
+                    Freight Price <span class="tooltip">🛈 Shipping. Example: 12.0</span>
+                </label>
+                <input type="number" id="fp1" name="fp1" step="any" required>
+            </div>
+
+            <!-- Competitor 2 -->
+            <h3 class="competitor-heading">🏷️ Competitor 2</h3>
+            <div class="form-group">
+                <label for="comp_2">
+                    Price <span class="tooltip">🛈 Price. Example: 117.5</span>
+                </label>
+                <input type="number" id="comp_2" name="comp_2" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="ps2">
+                    Product Score <span class="tooltip">🛈 Rating. Example: 4.0</span>
+                </label>
+                <input type="number" id="ps2" name="ps2" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="fp2">
+                    Freight Price <span class="tooltip">🛈 Shipping. Example: 11.5</span>
+                </label>
+                <input type="number" id="fp2" name="fp2" step="any" required>
+            </div>
+
+            <!-- Competitor 3 -->
+            <h3 class="competitor-heading">🏷️ Competitor 3</h3>
+            <div class="form-group">
+                <label for="comp_3">
+                    Price <span class="tooltip">🛈 Price. Example: 119.0</span>
+                </label>
+                <input type="number" id="comp_3" name="comp_3" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="ps3">
+                    Product Score <span class="tooltip">🛈 Rating. Example: 4.4</span>
+                </label>
+                <input type="number" id="ps3" name="ps3" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="fp3">
+                    Freight Price <span class="tooltip">🛈 Shipping. Example: 13.0</span>
+                </label>
+                <input type="number" id="fp3" name="fp3" step="any" required>
+            </div>
+
+            <button type="submit">✨ Predict ✨</button>
+        </form>
+
+        <h3 id="result"></h3>
+
+        <div class="explanation">
+            <h3>🔍 Feature Importance</h3>
+            <ul>
+                <li><strong>Unit Price</strong> – Main cost of product</li>
+                <li><strong>Freight Price</strong> – Additional logistics cost</li>
+                <li><strong>Lag Price</strong> – Past price for trend</li>
+                <li><strong>Competitor Prices</strong> – Market position</li>
+                <li><strong>Product Scores</strong> – Reflect product quality</li>
+            </ul>
         </div>
 
-        <div class="content-grid">
-            <div class="info-card">
-                <h3>About This Project</h3>
-                <p>This retail price optimization system leverages advanced machine learning algorithms to predict optimal pricing strategies. By analyzing multiple market factors including competitor pricing, freight costs, and historical price trends, the system provides data-driven recommendations for maximizing profitability while maintaining competitive positioning.</p>
-                <p>The model considers complex relationships between various pricing components to deliver accurate total price predictions that can inform strategic pricing decisions.</p>
-            </div>
-
-            <div class="info-card">
-                <h3>Key Features</h3>
-                <ul class="feature-list">
-                    <li>Multi-competitor price analysis</li>
-                    <li>Freight cost optimization</li>
-                    <li>Historical price trend analysis</li>
-                    <li>Real-time price prediction</li>
-                    <li>Market positioning insights</li>
-                    <li>Profit margin optimization</li>
-                    <li>Dynamic pricing recommendations</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="prediction-section">
-            <h2>Price Prediction Engine</h2>
-            <form id="predict-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="unit_price" class="tooltip">Unit Price
-                            <span class="tooltiptext">Base price per unit before additional costs</span>
-                        </label>
-                        <input type="number" id="unit_price" name="unit_price" step="0.01" required placeholder="Enter unit price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="freight_price" class="tooltip">Freight Price
-                            <span class="tooltiptext">Shipping and logistics cost per unit</span>
-                        </label>
-                        <input type="number" id="freight_price" name="freight_price" step="0.01" required placeholder="Enter freight cost">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lag_price" class="tooltip">Lag Price
-                            <span class="tooltiptext">Previous period pricing reference</span>
-                        </label>
-                        <input type="number" id="lag_price" name="lag_price" step="0.01" required placeholder="Enter lag price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="comp_1" class="tooltip">Competitor 1 Price
-                            <span class="tooltiptext">Primary competitor's current price</span>
-                        </label>
-                        <input type="number" id="comp_1" name="comp_1" step="0.01" required placeholder="Enter competitor 1 price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ps1" class="tooltip">PS1 (Price Sensitivity 1)
-                            <span class="tooltiptext">Price sensitivity metric for competitor 1</span>
-                        </label>
-                        <input type="number" id="ps1" name="ps1" step="0.01" required placeholder="Enter PS1 value">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fp1" class="tooltip">FP1 (Feature Premium 1)
-                            <span class="tooltiptext">Feature-based premium for competitor 1</span>
-                        </label>
-                        <input type="number" id="fp1" name="fp1" step="0.01" required placeholder="Enter FP1 value">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="comp_2" class="tooltip">Competitor 2 Price
-                            <span class="tooltiptext">Secondary competitor's current price</span>
-                        </label>
-                        <input type="number" id="comp_2" name="comp_2" step="0.01" required placeholder="Enter competitor 2 price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ps2" class="tooltip">PS2 (Price Sensitivity 2)
-                            <span class="tooltiptext">Price sensitivity metric for competitor 2</span>
-                        </label>
-                        <input type="number" id="ps2" name="ps2" step="0.01" required placeholder="Enter PS2 value">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fp2" class="tooltip">FP2 (Feature Premium 2)
-                            <span class="tooltiptext">Feature-based premium for competitor 2</span>
-                        </label>
-                        <input type="number" id="fp2" name="fp2" step="0.01" required placeholder="Enter FP2 value">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="comp_3" class="tooltip">Competitor 3 Price
-                            <span class="tooltiptext">Third competitor's current price</span>
-                        </label>
-                        <input type="number" id="comp_3" name="comp_3" step="0.01" required placeholder="Enter competitor 3 price">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ps3" class="tooltip">PS3 (Price Sensitivity 3)
-                            <span class="tooltiptext">Price sensitivity metric for competitor 3</span>
-                        </label>
-                        <input type="number" id="ps3" name="ps3" step="0.01" required placeholder="Enter PS3 value">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fp3" class="tooltip">FP3 (Feature Premium 3)
-                            <span class="tooltiptext">Feature-based premium for competitor 3</span>
-                        </label>
-                        <input type="number" id="fp3" name="fp3" step="0.01" required placeholder="Enter FP3 value">
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">Generate Price Prediction</button>
-            </form>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Analyzing market data and generating prediction...</p>
-            </div>
-
-            <div id="result" class="result">
-                Enter pricing parameters above to generate an optimized price prediction
-            </div>
+        <div class="explanation">
+            <h3>📘 Understanding the Prediction</h3>
+            <p>The total price is calculated by combining your <strong>unit price</strong>, <strong>freight charges</strong>, and comparing them with historical trends and competitor data.</p>
+            <p>A lower competitor price or higher previous price can adjust the prediction. The model ensures price is profitable yet competitive.</p>
         </div>
     </div>
 
     <script>
         const form = document.getElementById('predict-form');
-        const resultDiv = document.getElementById('result');
-        const loadingDiv = document.getElementById('loading');
-
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Show loading state
-            loadingDiv.classList.add('show');
-            resultDiv.textContent = '';
-            resultDiv.className = 'result';
-
             const features = {
                 unit_price: parseFloat(document.getElementById('unit_price').value),
                 freight_price: parseFloat(document.getElementById('freight_price').value),
@@ -443,29 +248,13 @@
                     body: JSON.stringify(features)
                 });
 
-                // Hide loading state
-                loadingDiv.classList.remove('show');
-
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
                 const data = await response.json();
-                resultDiv.textContent = `Predicted Optimal Price: $${parseFloat(data.predicted_total_price).toFixed(2)}`;
-                resultDiv.classList.add('success');
+                document.getElementById('result').innerText = `💰 Predicted Total Price: ₹${data.predicted_total_price}`;
             } catch (error) {
-                // Hide loading state
-                loadingDiv.classList.remove('show');
-                resultDiv.textContent = `Error: ${error.message}`;
-                resultDiv.classList.add('error');
+                document.getElementById('result').innerText = `❌ Error: ${error.message}`;
             }
-        });
-
-        // Add smooth scrolling to form submission
-        form.addEventListener('submit', () => {
-            setTimeout(() => {
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
         });
     </script>
 </body>
